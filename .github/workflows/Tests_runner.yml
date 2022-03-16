@@ -12,10 +12,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Install Maven and dependancies
-        run: |
-          apt-get install default-jdk, default-jre, maven
-
-      - name: Maven Tests
-        run: |
-          mvn test
+      - name: Docker run
+        run: docker-compose up -d

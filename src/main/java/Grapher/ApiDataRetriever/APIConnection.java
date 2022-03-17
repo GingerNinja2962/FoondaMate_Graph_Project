@@ -1,8 +1,8 @@
-package Grapher.ApiDataRetriver;
+package Grapher.ApiDataRetriever;
 
-import Grapher.ApiDataRetriver.JSONHandler.JsonBodyHandler;
-import Grapher.ApiDataRetriver.JSONHandler.DataStructure;
-import Grapher.ApiDataRetriver.Exceptions.ClientApiUrlException;
+import Grapher.ApiDataRetriever.JSONHandler.JsonBodyHandler;
+import Grapher.ApiDataRetriever.JSONHandler.DataStructure;
+import Grapher.ApiDataRetriever.Exceptions.ClientApiUrlException;
 
 import java.net.URI;
 import java.net.http.HttpClient;

@@ -1,4 +1,4 @@
-package Grapher.ApiDataRetriver.JSONHandler;
+package Grapher.ApiDataRetriever.JSONHandler;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;

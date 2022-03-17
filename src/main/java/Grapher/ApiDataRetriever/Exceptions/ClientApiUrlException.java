@@ -1,4 +1,4 @@
-package Grapher.ApiDataRetriver.Exceptions;
+package Grapher.ApiDataRetriever.Exceptions;
 
 /** An Exception class used to build an Exception,
  * with an Exception code and message.

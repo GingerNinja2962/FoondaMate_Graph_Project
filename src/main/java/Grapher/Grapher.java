@@ -3,7 +3,7 @@ package Grapher;
 public class Grapher {
     //region ====[ Example of APIConnection Package ]====
 //    private static APIConnection myAPIConnection;
-//    private static APIDataStructure APIData;
+//    private static DataStructure APIData;
 //
 //    public static void main(String[] args) {
 //        myAPIConnection = new APIConnection("http://sam-user-activity.eu-west-1.elasticbeanstalk.com/");

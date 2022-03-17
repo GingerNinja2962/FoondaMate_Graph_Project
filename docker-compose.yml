@@ -4,9 +4,7 @@ version: '2'
 services:
   Java:
     container_name: FoondaMate-Graph-project-dev
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    build: .
     image: henrywessels/foondamate-cli-graph-viewer:v1
     ports:
       - "2962:2962"

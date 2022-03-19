@@ -1,5 +1,6 @@
 # IDE IntelliJ files
 .idea
+*.iml
 
 # Java compiler files
 target

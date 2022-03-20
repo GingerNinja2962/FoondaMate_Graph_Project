@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 
-import java.net.http.HttpResponse.ResponseInfo;
 import java.net.http.HttpResponse.BodyHandler;
+import java.net.http.HttpResponse.ResponseInfo;
 import java.net.http.HttpResponse.BodySubscriber;
 import java.net.http.HttpResponse.BodySubscribers;
 
@@ -18,7 +18,7 @@ import java.util.function.Supplier;
  *
  * @author Henry Wessels
  * @version 1.0
- * @since 2022-02-16
+ * @since 2022-03-16
  */
 public record JsonBodyHandler<Type>(Class<Type> targetClass)
         implements BodyHandler<Supplier<Type>> {

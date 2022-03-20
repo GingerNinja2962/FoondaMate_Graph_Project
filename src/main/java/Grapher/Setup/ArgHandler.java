@@ -2,9 +2,10 @@ package Grapher.Setup;
 
 public class ArgHandler {
     private String[] orgArgs;
+    private String APIURL = "http://sam-user-activity.eu-west-1.elasticbeanstalk.com/";
+    private String graph;
     private String start;
     private String end;
-    private String graph;
 
     public ArgHandler(String[] args) {
         this.orgArgs = args;
@@ -23,8 +24,13 @@ public class ArgHandler {
                 case "-s" -> this.start = arg.toLowerCase();
                 case "-e" -> this.end = arg.toLowerCase();
                 case "-g" -> this.graph = arg.toLowerCase();
+                case "-a" -> this.APIURL = arg.toLowerCase();
             }
             previousArg = arg.toLowerCase();
         }
+    }
+
+    public String getAPIEndPoint() {
+        return APIURL;
     }
 }

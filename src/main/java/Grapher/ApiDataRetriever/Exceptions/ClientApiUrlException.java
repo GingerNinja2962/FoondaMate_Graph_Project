@@ -5,11 +5,12 @@ package Grapher.ApiDataRetriever.Exceptions;
  *
  * @author Henry Wessels
  * @version 1.0
- * @since 2022-02-16
+ * @since 2022-03-16
  */
 public class ClientApiUrlException extends Exception {
     private String exceptionCode;
 
+    //region ====[ Constructions ]====
     /** The constructor of ClientApiUrlException that builds off the Exception class
      * by supering the message and adding the Exception code.
      *
@@ -34,7 +35,9 @@ public class ClientApiUrlException extends Exception {
         super(message, cause);
         this.setCode(code);
     }
+    //endregion
 
+    //region ====[ Getters ]====
     /** The getter for the Exception code of the ClientApiUrlException.
      *
      * @return String containing the Exception code.
@@ -43,7 +46,9 @@ public class ClientApiUrlException extends Exception {
     public String getCode() {
         return exceptionCode;
     }
+    //endregion
 
+    //region ====[ Setters ]====
     /** The setter for the Exception code of the ClientApiUrlException.
      *
      * @param code A String containing the Exception code.
@@ -53,4 +58,5 @@ public class ClientApiUrlException extends Exception {
     public void setCode(String code) {
         this.exceptionCode = code;
     }
+    //endregion
 }

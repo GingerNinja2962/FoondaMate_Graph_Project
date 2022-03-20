@@ -9,7 +9,7 @@ import java.util.HashMap;
  *
  * @author Henry Wessels
  * @version 1.0
- * @since 2022-02-16
+ * @since 2022-03-16
  */
 public class DataStructure {
     private HashMap<String, String> dateDataLookup = new HashMap<String, String>();

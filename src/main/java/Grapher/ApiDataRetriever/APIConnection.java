@@ -1,7 +1,7 @@
 package Grapher.ApiDataRetriever;
 
-import Grapher.ApiDataRetriever.JSONHandler.JsonBodyHandler;
 import Grapher.ApiDataRetriever.JSONHandler.DataStructure;
+import Grapher.ApiDataRetriever.JSONHandler.JsonBodyHandler;
 import Grapher.ApiDataRetriever.Exceptions.ClientApiUrlException;
 
 import java.net.URI;
@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutionException;
  *
  * @author Henry Wessels
  * @version 1.0
- * @since 2022-02-16
+ * @since 2022-03-16
  */
 public class APIConnection {
     private final HttpClient ClientAPI;
@@ -47,10 +47,14 @@ public class APIConnection {
      * @see TimeoutException
      * @see ClientApiUrlException
      */
-    public DataStructure SendRequest()
-            throws InterruptedException, ExecutionException, TimeoutException, ClientApiUrlException {
-        if (this.ClientURL == null) throw new ClientApiUrlException("NullValue", "No up stream API URL");
-        return this.SendRequest(this.ClientURL, "60");
+    public DataStructure SendRequest() {
+        try {
+            if (this.ClientURL == null) throw new ClientApiUrlException("NullValue", "No up stream API URL");
+            return this.SendRequest(this.ClientURL, "60");
+        } catch (ClientApiUrlException c) {
+            System.out.println(c.getMessage());
+        }
+        return null;
     }
 
     /** This is used to send a request to the API web services,
@@ -67,8 +71,7 @@ public class APIConnection {
      * @see TimeoutException
      * @see ClientApiUrlException
      */
-    public DataStructure SendRequest(String UpStreamURL)
-            throws InterruptedException, ExecutionException, TimeoutException {
+    public DataStructure SendRequest(String UpStreamURL) {
         return this.SendRequest(UpStreamURL, "60");
     }
 
@@ -87,15 +90,23 @@ public class APIConnection {
      * @see TimeoutException
      * @see ClientApiUrlException
      */
-    public DataStructure SendRequest(String UpStreamURL, String timeoutInMinutes)
-            throws InterruptedException, ExecutionException, TimeoutException {
+    public DataStructure SendRequest(String UpStreamURL, String timeoutInMinutes) {
         BuildRequest(UpStreamURL);
 
-        return ClientAPI.sendAsync(
-            APIRequest, new JsonBodyHandler<>(DataStructure.class)
-        ).get(
-            Long.parseLong(timeoutInMinutes), TimeUnit.MINUTES
-        ).body().get();
+        try {
+            return ClientAPI.sendAsync(
+                    APIRequest, new JsonBodyHandler<>(DataStructure.class)
+            ).get(
+                    Long.parseLong(timeoutInMinutes), TimeUnit.MINUTES
+            ).body().get();
+        } catch (InterruptedException i) {
+            System.out.println(i.getMessage());
+        } catch (ExecutionException e) {
+            System.out.println(e.getMessage());
+        } catch (TimeoutException t) {
+            System.out.println(t.getMessage());
+        }
+        return null;
     }
     //endregion
 

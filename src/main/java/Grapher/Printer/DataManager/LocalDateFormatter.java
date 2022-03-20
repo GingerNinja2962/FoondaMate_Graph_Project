@@ -1,8 +1,8 @@
 package Grapher.Printer.DataManager;
 
 import com.joestelmach.natty.Parser;
-import net.fortuna.ical4j.model.DateTime;
 
+import java.time.ZoneId;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -31,21 +31,28 @@ public class LocalDateFormatter {
     public static LocalDate parse(String date) {
         try {
             return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        } catch (DateTimeParseException ignored) {
+        } catch (DateTimeParseException d) {
+            return parseUsingNatty(date);
         }
-        return null;
     }
     //endregion
 
     //region ====[ Deprecated ]====
     @Deprecated
     /** This uses Netty which stopped being maintained in 2017.
+     * If possible this should not be used however I could not
+     * find any other packages that worked as well as this does.
      *
      * @param date The date String to be interpreted.
-     * @return A DateTime object of String date.
+     * @return A LocalDate object of String date.
      */
-    public static DateTime parseUsingNatty(String date) {
-        return new DateTime(new Parser().parse(date).get(0).getDates().get(0));
+    private static LocalDate parseUsingNatty(String date) {
+        try {
+            return new Parser().parse(date).get(0).getDates().get(0)
+                    .toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        } catch (Exception e) {
+            return null;
+        }
     }
     //endregion
 }

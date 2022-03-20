@@ -35,12 +35,23 @@ public class TrimData {
     //endregion
 
     //region ====[ Getters ]====
+    /** Get the trimmed APIDate that has been trimmed with the
+     * start date and end date given in the command line launch args.
+     *
+     * @return SortedMap with LocalDates as Keys and Integers as values.
+     */
     public SortedMap<LocalDate, Integer> getTrimmedAPIData() {
         return APIData;
     }
     //endregion
 
     //region ====[ Private ]====
+    /** Trims the APIData from the start date given in the launch args
+     * to the last element in the APIData Map, This is inclusive and
+     * will do nothing in the case where no start date is given or the date
+     * is before the start of the APIData.
+     * @return Nothing.
+     */
     private void trimStartDate() {
         if (this.startDate == null) return;
         if (!this.APIData.firstKey().isBefore(this.startDate)) return;
@@ -48,6 +59,12 @@ public class TrimData {
         this.APIData = new TreeMap<LocalDate, Integer>(this.APIData.subMap(this.startDate, true, this.APIData.lastKey(), true));
     }
 
+    /** Trims the APIData from the first element in the APIData Map till
+     * the end date given in the launch args, This is inclusive and
+     * will do nothing in the case where no end date is given or the date
+     * is after the end of the APIData.
+     * @return Nothing.
+     */
     private void trimEndDate() {
         if (this.endDate == null) return;
         if (!this.APIData.lastKey().isAfter(this.endDate)) return;

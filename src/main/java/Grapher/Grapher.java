@@ -2,7 +2,7 @@ package Grapher;
 
 import Grapher.ApiDataRetriever.APIConnection;
 import Grapher.Printer.DataManager.DataManager;
-import Grapher.Printer.BarGraph.BarGraph;
+import Grapher.Printer.Graph.BarGraph.BarGraph;
 import Grapher.Setup.ArgHandler;
 import Grapher.Setup.TrimData;
 

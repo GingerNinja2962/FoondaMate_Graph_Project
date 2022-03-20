@@ -1,4 +1,4 @@
-package Grapher.Printer;
+package Grapher.Printer.Graph;
 
 public class GraphPrinter {
 }

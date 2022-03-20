@@ -35,11 +35,11 @@ public class BarGraph {
     }
 
     private int max() {
-        return Collections.max(this.Data.values().stream().toList());
+        return Collections.max(this.Data.values());
     }
 
     private int min() {
-        return Collections.min(this.Data.values().stream().toList());
+        return Collections.min(this.Data.values());
     }
 
     private int size() {

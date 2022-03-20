@@ -4,6 +4,7 @@ import Grapher.ApiDataRetriever.APIConnection;
 import Grapher.Printer.DataManager.DataManager;
 import Grapher.Printer.BarGraph.BarGraph;
 import Grapher.Setup.ArgHandler;
+import Grapher.Setup.TrimData;
 
 public class Grapher {
     private static APIConnection myAPIConnection;
@@ -21,7 +22,7 @@ public class Grapher {
         APIData = new DataManager(myAPIConnection.SendRequest());
 
         // Print out a graph given the data from the API and launch args.
-        new BarGraph(APIData.getSortedMap()).print();
+        new BarGraph(new TrimData(argHandler, APIData).getTrimmedAPIData()).print();
     }
     //endregion
 

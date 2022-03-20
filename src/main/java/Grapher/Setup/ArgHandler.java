@@ -1,36 +1,60 @@
 package Grapher.Setup;
 
+import Grapher.Printer.DataManager.LocalDateFormatter;
+
+import java.time.LocalDate;
+import java.util.regex.Pattern;
+
 public class ArgHandler {
     private String[] orgArgs;
     private String APIURL = "http://sam-user-activity.eu-west-1.elasticbeanstalk.com/";
+    private LocalDate start;
+    private LocalDate end;
     private String graph;
-    private String start;
-    private String end;
 
+    //region ====[ Constructors ]====
     public ArgHandler(String[] args) {
         this.orgArgs = args;
-        checkArgs();
+        splitArgs();
+    }
+    //endregion
+
+    //region ====[ Getters ]====
+    public String getAPIEndPoint() {
+        return APIURL;
     }
 
-    private void checkArgs() {
-        // TODO change to a DateTime check to checking for
-        //  1. StartDate format (dd-mm-yyyy/dd-mmm-yyyy/dd-mmmm-yyyy) (optional)
-        //  2. EndDate format (dd-mm-yyyy/dd-mmm-yyyy/dd-mmmm-yyyy) (optional)
-        //  3. GraphType (3 word format) (optional) (REGEX) "^\\s*[((:i)bar)((:i)histogram)((:i)line)]{1}\\s*$"
-        String previousArg = "";
+    public LocalDate getEnd() {
+        return end;
+    }
 
+    public LocalDate getStart() {
+        return start;
+    }
+
+    public String getGraph() {
+        return graph;
+    }
+    //endregion
+
+    //region ====[ Private ]====
+    private void splitArgs() {
+        String previousArg = "";
         for (String arg : this.orgArgs) {
             switch (previousArg) {
-                case "-s" -> this.start = arg.toLowerCase();
-                case "-e" -> this.end = arg.toLowerCase();
-                case "-g" -> this.graph = arg.toLowerCase();
+                case "-s" -> this.start = LocalDateFormatter.parse(arg.toLowerCase());
+                case "-e" -> this.end = LocalDateFormatter.parse(arg.toLowerCase());
+                case "-g" -> this.graph = checkGraphs(arg.toLowerCase());
                 case "-a" -> this.APIURL = arg.toLowerCase();
             }
             previousArg = arg.toLowerCase();
         }
     }
 
-    public String getAPIEndPoint() {
-        return APIURL;
+    private String checkGraphs(String graph) {
+        if (Pattern.compile("^\\s*(?:(?i)bar|histogram|line)\\s*$").matcher(graph).find())
+            return graph.replaceAll("\\s*", "");
+        return "bar";
     }
+    //endregion
 }

@@ -46,7 +46,7 @@ public class DataManager {
     //endregion
 
     //region ====[ Private ]====
-    /** A function that will create th SortedMap.
+    /** A function that will create the SortedMap.
      * It creates the SortedMap by started a boxed Int Stream of size 0 to the
      * length of the data in the DataStructure.
      * It then creates a Map using Collectors functions

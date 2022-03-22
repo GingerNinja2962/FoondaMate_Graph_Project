@@ -14,7 +14,7 @@ jobs:
         if: github.event.client_payload.event_type == 'delete_all_artifacts'
         uses: christian-korneck/delete-run-artifacts-action@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.token }}
         with: 
           parent_runid: ${{ github.event.client_payload.parent_runid }}
           parent_repo: ${{ github.event.client_payload.parent_repo }}

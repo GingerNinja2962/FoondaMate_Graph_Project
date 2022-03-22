@@ -1,8 +1,9 @@
 name: Cleanup Artifacts
 
 on:
-  workflow_dispatch:
   repository_dispatch:
+    types: [Build-Completed]
+  workflow_dispatch:
 
 
 jobs:

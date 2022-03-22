@@ -7,7 +7,7 @@ on:
 
 jobs:
   Release:
-    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    if: ${{ startsWith(github.event.client_payload.ref, 'refs/tags/') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +32,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: call webhook to delete artifacts
-        env:
-          FOR_WEBHOOKS_SECRET: ${{ secrets.WEBHOOK_SECRET }}
-        run: |
-          echo "::add-mask::$FOR_WEBHOOKS_SECRET"
-          curl --verbose --fail --show-error --location --request POST "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" --header "Authorization: token $FOR_WEBHOOKS_SECRET" --header 'Content-Type: application/json' --header 'Accept: application/vnd.github.everest-preview+json' --data-raw "{ \"event_type\": \"delete_all_artifacts\", \"client_payload\": {\"parent_runid\": \"$GITHUB_RUN_ID\", \"parent_repo\": \"$GITHUB_REPOSITORY\"} }"
+    - name: Repository Dispatch [Cleanup]
+      if: always()
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.WEBHOOK_SECRET }}
+        event-type: Release-Completed
+        client-payload: '{ \"event_type\": \"delete_all_artifacts\", \"client_payload\": {\"parent_runid\": \"$GITHUB_RUN_ID\", \"parent_repo\": \"$GITHUB_REPOSITORY\"} }'
+
+#      - name: call webhook to delete artifacts
+#        env:
+#          FOR_WEBHOOKS_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+#        run: |
+#          echo "::add-mask::$FOR_WEBHOOKS_SECRET"
+#          curl --verbose --fail --show-error --location --request POST "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" --header "Authorization: token $FOR_WEBHOOKS_SECRET" --header 'Content-Type: application/json' --header 'Accept: application/vnd.github.everest-preview+json' --data-raw "{ \"event_type\": \"delete_all_artifacts\", \"client_payload\": {\"parent_runid\": \"$GITHUB_RUN_ID\", \"parent_repo\": \"$GITHUB_REPOSITORY\"} }"

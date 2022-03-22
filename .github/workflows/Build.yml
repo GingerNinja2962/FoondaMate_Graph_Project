@@ -32,6 +32,11 @@ jobs:
           path: ./packages
           if-no-files-found: error
 
+  Release:
+    needs: Build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Repository Dispatch [Release]
         if: always()
         uses: peter-evans/repository-dispatch@v1

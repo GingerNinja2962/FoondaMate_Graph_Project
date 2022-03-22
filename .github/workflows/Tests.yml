@@ -34,6 +34,6 @@ jobs:
       - name: Repository Dispatch [Build]
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ github.token }}
           event-type: Build
           client-payload: '{"ref": "${{ github.ref }}", "ref_name": "${{ github.ref_name }}"}'

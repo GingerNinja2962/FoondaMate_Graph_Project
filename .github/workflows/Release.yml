@@ -18,7 +18,8 @@ jobs:
       - uses: actions/download-artifact@v3
         name: Download JAR artifact
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: JAR_Releases
+          GITHUB_TOKEN: ${{ github.token }}
 
       - uses: softprops/action-gh-release@v1
         name: Release new release
@@ -37,7 +38,7 @@ jobs:
       if: always()
       uses: peter-evans/repository-dispatch@v1
       with:
-        token: ${{ secrets.WEBHOOK_SECRET }}
+        token: ${{ github.token }}
         event-type: Cleanup-Artifacts
         client-payload: '{"event_type": "delete_all_artifacts", "client_payload": {"parent_runid": "${{github.event.client_payload.run_id}}", "parent_repo": "${{ github.repository }}"}}'
 

@@ -7,16 +7,16 @@ on:
       client-payload:
         required: true
         type: string
-      event-type:
-        required: true
-        type: string
+#      event-type:
+#        required: true
+#        type: string
     secrets:
       parent_access_token:
         required: true
   #testing reusable workflow
 
-  repository_dispatch:
-    types: [Build]
+#  repository_dispatch:
+#    types: [Build]
   workflow_dispatch:
 
 jobs:

@@ -12,7 +12,6 @@ jobs:
         run: |
           echo ${{ github.event.client_payload.parent_runid }}
           echo ${{ github.event.client_payload.parent_repo }}
-          echo ${{ secrets.GITHUB_TOKEN# }}
           echo ${{ github.event.client_payload.event_type }}
 
       - name: Delete artifacts

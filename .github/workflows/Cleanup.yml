@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: testing
-        run: |
-          echo ${{toJson(github)}}
-
       - name: Delete artifacts
         if: github.event.client_payload.event_type == 'delete_all_artifacts'
         uses: christian-korneck/delete-run-artifacts-action@v1

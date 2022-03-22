@@ -17,16 +17,12 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}
     needs: Test
     uses: GingerNinja2962/FoondaMate_Graph_Project/.github/workflows/Build.yml@main
-    secrets:
-      parent_access_token: ${{ secrets.token }}
 
 
   Release:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}
     needs: Build
     uses: GingerNinja2962/FoondaMate_Graph_Project/.github/workflows/Release.yml@main
-    secrets:
-      parent_access_token: ${{ secrets.token }}
 
 
   Cleanup:

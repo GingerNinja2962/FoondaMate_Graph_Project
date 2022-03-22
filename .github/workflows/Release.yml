@@ -2,9 +2,6 @@ name: Release
 
 on:
   workflow_call:
-    secrets:
-      parent_access_token:
-        required: true
   workflow_dispatch:
 
 

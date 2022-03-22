@@ -1,7 +1,9 @@
 name: Cleanup Artifacts
 
 on:
-  repository_dispatch
+  workflow_dispatch:
+  repository_dispatch:
+
 
 jobs:
   main:

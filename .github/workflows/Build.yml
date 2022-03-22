@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  repository_dispatch:
+    types: [Tests-Passed]
+  workflow_dispatch:
+
+jobs:
+  Build:
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+
+      - uses: actions/setup-java@v2
+        name: Setup Java
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: package
+        run: mvn package -Dmaven.test.skip=true
+
+      - uses: actions/upload-artifact@v3
+        name: Upload JAR Artifact
+        with:
+          name: JAR_Releases
+          path: ./packages
+          if-no-files-found: error
+
+      - name: Repository Dispatch [Release]
+        if: always()
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          event-type: Build-Completed
+          client-payload: '{"ref": "${{ github.ref }}"}"}'

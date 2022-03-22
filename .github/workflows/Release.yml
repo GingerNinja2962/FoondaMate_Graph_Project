@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  repository_dispatch:
+    types: [Build-Completed]
+  workflow_dispatch:
+
+jobs:
+  Release:
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+
+      - uses: actions/download-artifact@v3
+        name: Download JAR artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: softprops/action-gh-release@v1
+        name: Release new release
+        with:
+          files: ./JAR_Releases/*
+
+
+  Cleanup:
+    needs: [Release]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: call webhook to delete artifacts
+        env:
+          FOR_WEBHOOKS_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+        run: |
+          echo "::add-mask::$FOR_WEBHOOKS_SECRET"
+          curl --verbose --fail --show-error --location --request POST "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" --header "Authorization: token $FOR_WEBHOOKS_SECRET" --header 'Content-Type: application/json' --header 'Accept: application/vnd.github.everest-preview+json' --data-raw "{ \"event_type\": \"delete_all_artifacts\", \"client_payload\": {\"parent_runid\": \"$GITHUB_RUN_ID\", \"parent_repo\": \"$GITHUB_REPOSITORY\"} }"

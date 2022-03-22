@@ -21,7 +21,7 @@ on:
 
 jobs:
   Build:
-    if: ${{ startsWith(github.event.client_payload.ref, 'refs/tags/') }}
+#    if: ${{ startsWith(github.event.client_payload.ref, 'refs/tags/') }}
     runs-on: ubuntu-latest
 
     steps:

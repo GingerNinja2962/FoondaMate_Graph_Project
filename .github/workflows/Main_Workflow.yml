@@ -32,4 +32,4 @@ jobs:
         with:
           token: ${{ secrets.WEBHOOK_SECRET }}
           event-type: Cleanup-Artifacts
-          client-payload: '{"event_type": "delete_all_artifacts", "parent_data": {"parent_runid": "${{github.run_id}}", "parent_repo": "${{ github.repository }}"}}'
+          client-payload: '{"event_type": "delete_all_artifacts", "parent_runid": "${{github.run_id}}", "parent_repo": "${{ github.repository }}"}'

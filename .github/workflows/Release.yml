@@ -23,7 +23,7 @@ jobs:
       - uses: softprops/action-gh-release@v1
         name: Release new release
         with:
-          tag_name: ${{ github.event.client_payload.ref#refs/*/ }}
+          tag_name: ${{ github.event.client_payload.ref_name }}
           files: ./JAR_Releases/*
 
 

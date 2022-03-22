@@ -1,10 +1,9 @@
 package Grapher;
 
-import Grapher.ApiDataRetriever.APIConnection;
 import Grapher.Printer.DataManager.DataManager;
-import Grapher.Printer.Graph.BarGraph.BarGraph;
+import Grapher.ApiDataRetriever.APIConnection;
+import Grapher.Printer.Graph.GraphPrinter;
 import Grapher.Setup.ArgHandler;
-import Grapher.Setup.TrimData;
 
 public class Grapher {
     private static APIConnection myAPIConnection;
@@ -22,7 +21,7 @@ public class Grapher {
         APIData = new DataManager(myAPIConnection.SendRequest());
 
         // Print out a graph given the data from the API and launch args.
-        new BarGraph(new TrimData(argHandler, APIData).getTrimmedAPIData()).print();
+        new GraphPrinter(argHandler, APIData).print();
     }
     //endregion
 

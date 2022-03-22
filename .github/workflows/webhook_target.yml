@@ -2,7 +2,7 @@ name: Cleanup Artifacts
 
 on:
   repository_dispatch:
-    types: [Build-Completed]
+    types: [Cleanup-Artifacts]
   workflow_dispatch:
 
 

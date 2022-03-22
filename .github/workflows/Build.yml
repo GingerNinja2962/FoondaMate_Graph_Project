@@ -2,7 +2,7 @@ name: Build
 
 on:
   repository_dispatch:
-    types: [Tests-Passed]
+    types: [Build]
   workflow_dispatch:
 
 jobs:
@@ -37,5 +37,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          event-type: Build-Completed
+          event-type: Release
           client-payload: '{"ref": "${{ github.ref }}"}"}'

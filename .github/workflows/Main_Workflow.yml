@@ -31,6 +31,6 @@ jobs:
       - name: Repository Dispatch [Cleanup]
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.WEBHOOK_SECRET }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: Cleanup
           client-payload: '{"event_type": "delete_all_artifacts", "parent_runid": "${{ github.run_id }}", "parent_repo": "${{ github.repository }}"}'

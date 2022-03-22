@@ -55,6 +55,7 @@ jobs:
         if: always()
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.parent_access_token }}
+#          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: Release
-          client-payload: '{"ref": "${{github.event.client_payload.ref}}", "ref_name": "${{ github.event.client_payload.ref_name }}", "run_id": "${{ github.run_id }}"}'
+          client-payload: '{"ref": "${{github.ref}}", "ref_name": "${{ github.ref_name }}", "run_id": "${{ github.run_id }}"}'

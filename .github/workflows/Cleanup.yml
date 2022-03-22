@@ -1,10 +1,9 @@
-name: Cleanup Artifacts
+name: Cleanup
 
 on:
   repository_dispatch:
     types: [Cleanup-Artifacts]
   workflow_dispatch:
-
 
 jobs:
   main:

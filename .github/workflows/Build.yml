@@ -4,7 +4,6 @@ on:
   workflow_call:
   workflow_dispatch:
 
-
 jobs:
   Build:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}

@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Delete artifacts
-        if: github.event.action == 'delete_all_artifacts'
+        if: github.event.client-payload.event_type == 'delete_all_artifacts'
         uses: christian-korneck/delete-run-artifacts-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

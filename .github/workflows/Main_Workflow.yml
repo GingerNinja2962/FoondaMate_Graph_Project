@@ -21,7 +21,6 @@ jobs:
     needs: Build
     uses: GingerNinja2962/FoondaMate_Graph_Project/.github/workflows/Release.yml@main
 
-
   Cleanup:
     needs: Release
     if: always()

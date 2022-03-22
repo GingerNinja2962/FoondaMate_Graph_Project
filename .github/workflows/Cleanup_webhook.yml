@@ -1,4 +1,4 @@
-name: Cleanup Artifacts
+name: Cleanup
 
 on:
   repository_dispatch

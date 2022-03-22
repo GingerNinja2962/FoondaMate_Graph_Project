@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name:
+        run: |
+          echo ${{ github.event.client_payload.parent_runid }}
+          echo ${{ github.event.client_payload.parent_repo }}
+          echo ${{ secrets.GITHUB_TOKEN# }}
+          echo ${{ github.event.client_payload.event_type }}
+
       - name: Delete artifacts
         if: github.event.client_payload.event_type == 'delete_all_artifacts'
         uses: christian-korneck/delete-run-artifacts-action@v1

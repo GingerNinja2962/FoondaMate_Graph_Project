@@ -1,6 +1,20 @@
 name: Build
 
 on:
+#testing reusable workflow
+  workflow_call:
+    inputs:
+      client-payload:
+        required: true
+        type: string
+      event-type:
+        required: true
+        type: string
+    secrets:
+      parent_access_token:
+        required: true
+  #testing reusable workflow
+
   repository_dispatch:
     types: [Build]
   workflow_dispatch:
@@ -41,6 +55,6 @@ jobs:
         if: always()
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: Release
           client-payload: '{"ref": "${{github.event.client_payload.ref}}", "ref_name": "${{ github.event.client_payload.ref_name }}", "run_id": "${{ github.run_id }}"}'

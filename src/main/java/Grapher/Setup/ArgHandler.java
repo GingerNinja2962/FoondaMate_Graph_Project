@@ -16,9 +16,9 @@ import java.time.LocalDate;
 public class ArgHandler {
     private String[] orgArgs;
     private String APIURL = "http://sam-user-activity.eu-west-1.elasticbeanstalk.com/";
+    private String graph = "bar";
     private LocalDate start;
     private LocalDate end;
-    private String graph;
 
     //region ====[ Constructors ]====
     /** the constructor for the ArgHandler class.

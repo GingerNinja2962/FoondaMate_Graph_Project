@@ -33,11 +33,12 @@ jobs:
     steps:
 #testing reusable workflow
       - name: Repository Dispatch [Build]
-        uses: peter-evans/repository-dispatch@v1
+        uses: GingerNinja2962/FoondaMate_Graph_Project/.github/workflows/Build.yml@main
         with:
-          parent_access_token: ${{ secrets.token }}
           event-type: Build
           client-payload: '{"ref": "${{ github.ref }}", "ref_name": "${{ github.ref_name }}"}'
+        secrets:
+          parent_access_token: ${{ secrets.token }}
 #testing reusable workflow
 
 

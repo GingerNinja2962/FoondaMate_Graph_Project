@@ -1,19 +1,24 @@
 name: Release
 
 on:
-  repository_dispatch:
-    types: [Release]
+  workflow_call:
+    secrets:
+      parent_access_token:
+        required: true
+
+#  repository_dispatch:
+#    types: [Release]
   workflow_dispatch:
 
 jobs:
   Release:
-    if: ${{ startsWith(github.event.client_payload.ref, 'refs/tags/') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.client_payload.ref }}
+          ref: ${{ github.ref }}
 
       - uses: actions/download-artifact@v3
         name: Download JAR artifact
@@ -24,7 +29,7 @@ jobs:
       - uses: softprops/action-gh-release@v1
         name: Release new release
         with:
-          tag_name: ${{ github.event.client_payload.ref_name }}
+          tag_name: ${{ github.ref_name }}
           files: ./JAR_Releases/*
 
 
@@ -38,7 +43,7 @@ jobs:
       if: always()
       uses: peter-evans/repository-dispatch@v1
       with:
-        token: ${{ github.token }}
+        token: ${{ github.parent_access_token }}
         event-type: Cleanup-Artifacts
         client-payload: '{"event_type": "delete_all_artifacts", "client_payload": {"parent_runid": "${{github.event.client_payload.run_id}}", "parent_repo": "${{ github.repository }}"}}'
 

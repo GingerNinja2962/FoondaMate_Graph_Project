@@ -18,7 +18,7 @@ jobs:
         name: Setup Java
         with:
           java-version: 17
-          distribution: zulu
+          distribution: temurin
       - name: Tests
         run: mvn test
 
@@ -34,7 +34,7 @@ jobs:
         name: Setup Java
         with:
           java-version: 17
-          distribution: zulu
+          distribution: temurin
 
       - name: package
         run: mvn package -Dmaven.test.skip=true

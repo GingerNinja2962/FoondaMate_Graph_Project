@@ -22,7 +22,7 @@ jobs:
         name: Download JAR artifact
         env:
           name: JAR_Releases
-          GITHUB_TOKEN: ${{ github.token }}
+#          GITHUB_TOKEN: ${{ github.token }}
 
       - uses: softprops/action-gh-release@v1
         name: Release new release

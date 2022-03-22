@@ -2,9 +2,6 @@ name: Build
 
 on:
   workflow_call:
-    secrets:
-      parent_access_token:
-        required: true
   workflow_dispatch:
 
 
@@ -16,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.client_payload.ref }}
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-java@v2
         name: Setup Java

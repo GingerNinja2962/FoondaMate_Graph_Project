@@ -36,9 +36,8 @@ jobs:
 
     steps:
       - name: Repository Dispatch [Cleanup]
-        if: always()
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: Cleanup-Artifacts
           client-payload: '{"event_type": "delete_all_artifacts", "client_payload": {"parent_runid": "${{github.run_id}}", "parent_repo": "${{ github.repository }}"}}'

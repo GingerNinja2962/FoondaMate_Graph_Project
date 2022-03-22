@@ -5,10 +5,8 @@ on:
     secrets:
       parent_access_token:
         required: true
-
-#  repository_dispatch:
-#    types: [Release]
   workflow_dispatch:
+
 
 jobs:
   Release:
@@ -31,25 +29,3 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           files: ./JAR_Releases/*
-
-
-  Cleanup:
-    needs: Release
-    if: always()
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Repository Dispatch [Cleanup]
-      if: always()
-      uses: peter-evans/repository-dispatch@v1
-      with:
-        token: ${{ github.parent_access_token }}
-        event-type: Cleanup-Artifacts
-        client-payload: '{"event_type": "delete_all_artifacts", "client_payload": {"parent_runid": "${{github.event.client_payload.run_id}}", "parent_repo": "${{ github.repository }}"}}'
-
-#      - name: call webhook to delete artifacts
-#        env:
-#          FOR_WEBHOOKS_SECRET: ${{ secrets.WEBHOOK_SECRET }}
-#        run: |
-#          echo "::add-mask::$FOR_WEBHOOKS_SECRET"
-#          curl --verbose --fail --show-error --location --request POST "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" --header "Authorization: token $FOR_WEBHOOKS_SECRET" --header 'Content-Type: application/json' --header 'Accept: application/vnd.github.everest-preview+json' --data-raw "{ \"event_type\": \"delete_all_artifacts\", \"client_payload\": {\"parent_runid\": \"$GITHUB_RUN_ID\", \"parent_repo\": \"$GITHUB_REPOSITORY\"} }"

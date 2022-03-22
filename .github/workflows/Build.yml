@@ -38,4 +38,4 @@ jobs:
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: Release
-          client-payload: '{"ref": "${{ github.ref }}"}"}'
+          client-payload: '{"ref": "${{github.event.client_payload.ref}}", "run_id": "$GITHUB_RUN_ID"}'

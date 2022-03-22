@@ -44,3 +44,28 @@ jobs:
 #            parent_access_token: ${{ secrets.token }}
 #          event-type: Build
 #          client-payload: '{"ref": "${{ github.ref }}", "ref_name": "${{ github.ref_name }}"}'
+
+  Release:
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    needs: Build
+    uses: GingerNinja2962/FoondaMate_Graph_Project/.github/workflows/Release.yml@main
+    #    with:
+    #      event-type: Build
+    #      client-payload: '{"ref": "${{ github.ref }}", "ref_name": "${{ github.ref_name }}"}'
+    secrets:
+      parent_access_token: ${{ secrets.token }}
+
+
+  Cleanup:
+    needs: Release
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository Dispatch [Cleanup]
+        if: always()
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ github.token }}
+          event-type: Cleanup-Artifacts
+          client-payload: '{"event_type": "delete_all_artifacts", "client_payload": {"parent_runid": "${{github.run_id}}", "parent_repo": "${{ github.repository }}"}}'

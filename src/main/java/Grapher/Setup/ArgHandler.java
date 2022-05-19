@@ -14,10 +14,25 @@ import java.time.LocalDate;
  * @since 2022-03-20
  */
 public class ArgHandler {
-    private String[] orgArgs;
+    /** The programs' startup Arguments that determine how the program will function.
+     * This must be an exact copy of or the original String array from the main function.
+     */
+    private final String[] orgArgs;
+    /** The web Address of the remote API.
+     * This must be a fully qualified URL web address, stored in a String.
+     */
     private String APIURL = "http://sam-user-activity.eu-west-1.elasticbeanstalk.com/";
+    /** This is the Type of graph to print the data as.
+     * The default will be a BAR graph.
+     */
     private String graph = "bar";
+    /** This is the date that the data will be displayed from.
+     * This is only a filter and if set incorrectly will cause no data to be displayed.
+     */
     private LocalDate start;
+    /** This is the date that the data will be displayed to, The last date until which data will be shown.
+     * This is only a filter and if set incorrectly will cause no data to be displayed.
+     */
     private LocalDate end;
 
     //region ====[ Constructors ]====
@@ -72,7 +87,6 @@ public class ArgHandler {
     /** A function that identifies and sets the
      * start, end, graph and api values by checking
      * the args by their specifiers (-s -e -g and -a).
-     * @return Nothing.
      */
     private void splitArgs() {
         String previousArg = "";

@@ -8,6 +8,9 @@ package Grapher.ApiDataRetriever.Exceptions;
  * @since 2022-03-16
  */
 public class ClientApiUrlException extends Exception {
+    /** This is a unique Identifier for the ClientApiUrlException uses.<br>
+     * It is the code returned from the API when an Exception occurs.
+     */
     private String exceptionCode;
 
     //region ====[ Constructions ]====
@@ -52,7 +55,6 @@ public class ClientApiUrlException extends Exception {
     /** The setter for the Exception code of the ClientApiUrlException.
      *
      * @param code A String containing the Exception code.
-     * @return Nothing.
      * @see Exception
      */
     public void setCode(String code) {

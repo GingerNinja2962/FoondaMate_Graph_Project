@@ -38,13 +38,13 @@ public class LocalDateFormatter {
     //endregion
 
     //region ====[ Deprecated ]====
-    @Deprecated
     /** This uses Netty which stopped being maintained in 2017.
      * If possible this should not be used however I could not
      * find any other packages that worked as well as this does.
      *
      * @param date The date String to be interpreted.
      * @return A LocalDate object of String date.
+     * @deprecated This is a very old Library and is no longer maintained.
      */
     private static LocalDate parseUsingNatty(String date) {
         try {

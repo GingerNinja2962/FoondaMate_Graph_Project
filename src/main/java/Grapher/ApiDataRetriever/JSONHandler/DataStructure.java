@@ -12,6 +12,10 @@ import java.util.HashMap;
  * @since 2022-03-16
  */
 public class DataStructure {
+    /** This is a HashMap that contains all the date(String) - Value(String) pairs, returned from the remote API.<br>
+     * This class is used by a JSON mapping library to map out the data from the JSON response into data used by the
+     * CLI.
+     */
     private HashMap<String, String> dateDataLookup = new HashMap<String, String>();
 
     //region ====[ Setters ]====
@@ -19,7 +23,6 @@ public class DataStructure {
      *
      * @param key The key to be placed in the HashMap as a String.
      * @param value The Value to said Key to be placed in the HashMap as a String.
-     * @return Nothing.
      * @see JsonAnySetter
      */
     @JsonAnySetter

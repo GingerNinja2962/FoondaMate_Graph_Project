@@ -18,8 +18,19 @@ import Grapher.Setup.TrimData;
  * @see Histogram
  */
 public class GraphPrinter {
+    /** The APIs' Data stored in a DataManager class.
+     * This is both the formatted and filtered data and un-formatted data.
+     */
     private final DataManager APIData;
+    /** This is the Launch Arguments the CLI takes.
+     * After being checked and sorted it is stored in a ArgHandler class.
+     */
     private final ArgHandler args;
+    /** This is a graph object, created using an interface of type 'graph'.
+     * This is used to contain the graph that needs to be printed.<br>
+     * Since more functionality is to be added this is a future proofing way of allowing that expansion in
+     * features later.
+     */
     private Graph graph;
 
     //region ====[ Constructors ]====
@@ -40,8 +51,6 @@ public class GraphPrinter {
      * with the highest value being a full bar, and the lowest an almost
      * empty bar. The graph is based on the command line args,
      * if no graph type was given then a bar graph will be printed.
-     *
-     * @return Nothing.
      */
     public void print() {
         switch (args.getGraph()) {

@@ -14,8 +14,19 @@ import java.time.LocalDate;
  * @since 2022-03-20
  */
 public class TrimData {
+    /** This is the first date from which data should be shown.
+     * This is set using the CLI Launch arguments, If not set then all data until the end date will be displayed.
+     * Or all data if both Start and End are not set.
+     */
     private final LocalDate startDate;
+    /** This is the last date until which data should be shown.
+     * This is set using the CLI Launch arguments, If not set then all data from the start date will be displayed.
+     * Or all data if both Start and End are not set.
+     */
     private final LocalDate endDate;
+    /** This is the TreeMap containing the LocalDates and Integer values converted from the String - String pairs
+     * Retrieved from the Remote API.
+     */
     private TreeMap<LocalDate, Integer> APIData;
 
     //region ====[ Constructor ]====
@@ -50,7 +61,6 @@ public class TrimData {
      * to the last element in the APIData Map, This is inclusive and
      * will do nothing in the case where no start date is given or the date
      * is before the start of the APIData.
-     * @return Nothing.
      */
     private void trimStartDate() {
         if (this.startDate == null) return;
@@ -63,7 +73,6 @@ public class TrimData {
      * the end date given in the launch args, This is inclusive and
      * will do nothing in the case where no end date is given or the date
      * is after the end of the APIData.
-     * @return Nothing.
      */
     private void trimEndDate() {
         if (this.endDate == null) return;

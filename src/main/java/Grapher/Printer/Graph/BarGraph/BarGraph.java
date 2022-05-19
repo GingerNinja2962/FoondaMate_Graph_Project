@@ -15,9 +15,24 @@ import java.util.Collections;
  * @see Graph
  */
 public class BarGraph implements Graph {
+    /** This is a Sorted Map of the data retrieved from the remote API.
+     * This is the final data after all the filters on what data must be displayed have run.
+     */
     private final SortedMap<LocalDate, Integer> Data;
+    /** This is the length of the largest value to be displayed in the bar graph.
+     * This is set in the constructor using the Data SortedMap.
+     */
     private final int Max;
+    /** This is the length of the smallest value to be displayed in the bar graph.
+     * This is set in the constructor using the Data SortedMap.
+     */
     private final int Min;
+    /** <p>This is the value each increment of a bar will represent.<br>
+     * This is calculated by dividing the difference between Max and Min by 50.
+     * This is used to scale a bar so any range of data can be displayed.<br>
+     * (Max - Min) / 50
+     * </p>
+     */
     private final int Size;
 
     //region ====[ Constructor ]====
@@ -38,8 +53,6 @@ public class BarGraph implements Graph {
      * Using the data constructed on instantiation, the graph is printed
      * with the highest value being a full bar, and the lowest an almost
      * empty bar.
-     *
-     * @return Nothing.
      */
     public void print() {
         System.out.println("====[ Bar-Graph ]====\n");

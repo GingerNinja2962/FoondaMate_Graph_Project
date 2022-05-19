@@ -13,6 +13,12 @@ import java.net.http.HttpResponse.BodySubscribers;
 
 import java.util.function.Supplier;
 
+// The Reason I used a Record and not a normal class here was:
+// Firstly to use on, Since I have never used one before I was seeing how it worked.
+
+// I know a Record should only be used to HOLD data and not necessarily for its logic(methods), but this is a fun
+// Experiment that does actually work.
+
 /** A Json Body Handler record used to map data from
  * a JSON http response body to an object of a class.
  *
@@ -22,6 +28,9 @@ import java.util.function.Supplier;
  */
 public record JsonBodyHandler<Type>(Class<Type> targetClass)
         implements BodyHandler<Supplier<Type>> {
+    /** This is the ObjectMapper that will be used to map all the JSON data into a class.
+     * This is used by the 'toSupplierOfType' function.
+     */
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     //region ====[ apply ]====

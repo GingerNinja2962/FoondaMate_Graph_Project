@@ -11,8 +11,6 @@ public interface Graph {
      * Using the data constructed on instantiation, the graph is printed
      * with the highest value being a full measurement, and the lowest an almost
      * empty measurement.
-     *
-     * @return Nothing.
      */
     void print();
 }
